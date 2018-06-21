@@ -3,6 +3,8 @@ import copy
 import itertools
 import operator
 from functools import reduce
+import pickle
+import csv
 
 def em_run(sentence_pairs):
 
@@ -61,8 +63,6 @@ def em_run(sentence_pairs):
             alignment_probs[sentence_idx] = probs
 
 
-        #source = []
-        #target = []
         word_translations = defaultdict(lambda: defaultdict(float))
         for sentence_alignments in alignment_probs.values():
             for word_pairs, prob in sentence_alignments.items():
@@ -71,10 +71,8 @@ def em_run(sentence_pairs):
 
         conditional_probs = {}
         for target_word, translations in word_translations.items():
-            #target.append(target_word)
             total = float(sum(translations.values()))
             for source_word, score in translations.items():
-                #source.append(source_word)
                 conditional_probs[source_word, target_word] = score / total
 
     wordP = []
@@ -130,31 +128,69 @@ def em_run(sentence_pairs):
     print()
     print()
     aligned = zip(posR, hpos)
-    print(list(aligned))
-    
+    l = list(aligned)
+    print(l)
 
-    #for pos, word in lh:
-     #   if word in htrans:
-      #      print(pos, word)
-        
+    index = []
+
+##    x = [i[0] for i in l]
+##    for s in x:
+##        if(s == 0):
+##            index.append(x.index(s))
+##            print('break')
+##
+##    print(index)
+
+
+    glist = []
+    subl = []
+
+    for tup in l:
+        if tup[0] == 0:
+            if subl != []:
+                glist.append(subl)
+                subl = []
+        subl.append(tup)
+    if subl != []:
+        glist.append(subl)
+
+##    for s in glist:
+##        print(*s)
+
     
-    
-    #for target_word, translations in word_translations.items():
-        #for source_word, score in translations.items():
-            #print(translations.items())
-            #wordP = []
-            #while(len(translations) != len(wordP)):
-                #wordP.append(conditional_probs[source_word, target_word])
+    with open('alignment.csv', 'w') as f:
+        wr = csv.writer(f)
+        wr.writerows(glist)
             
 
+    
+##    print([x for x in [list(group) for key, group in itertools.groupby(l, key = lambda k: k[1] == 0)]
+##          if x[0][1] != 0])
 
-            #print(source_word, target_word)
+##    SplitList = []
+##
+##    for i, tup in enumerate(l):
+##        if i != len(l)-1:
+##            if i == 0:
+##                tmp = []
+##            if tup[0] == 0:
+##                tmp.append(tup)
+##                if tmp:
+##                    SplitList.append(tmp)
+##                    tmp = []
+##        else:
+##            tmp.append(tup)
+##            
+##    print(SplitList)
+
+    #if ((i[0] for i in l):
+     #   print ('break')
 
 
 
-
-            #for maxProb in conditional_probs[source_word, target_word]:
-                #maxP = max(maxProb.items(), key = operator.itemgetter(1))[0]
+##    with open('alignment.txt', 'wb') as align:
+##        pickle.dump(l, align)
+    
     print()
     print()
     return conditional_probs
