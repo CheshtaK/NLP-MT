@@ -46,20 +46,50 @@ def phrase_extraction(srctext, trgtext, alignment):
                 bp.update(phrases)
     return bp
 
+
+with open('in.txt') as e, open('out.txt') as h:
+    with open('alignment.csv', 'r') as align:
+        reader = csv.reader(align, delimiter = "\t")
+        for english, hindi in zip(e, h):
+            english = english.strip()
+            hindi = hindi.strip()
+            for align in reader:
+                print(english, hindi, align)
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+##
+##open('alignment.csv', 'r') as align:
+##    for english, hindi, alignment in zip(e, h, align):
+##        english = english.strip()
+##        hindi = hindi.strip()
+##        alignment = alignment.strip()
+##        print(english, hindi, alignment)
+
+
 #             0     1     2     3    4 
 srctext = "please enter valid phone no"
 #           0   1   2  3   4  5 
 trgtext = "कृपया मान्य फोन नंबर दर्ज करें"
 
 
-with open('alignment.csv', 'rt') as f:
-    reader = csv.reader(f, delimiter = "\t")
-    for i,line in enumerate(reader):
-        print ('line[{}] = {}'.format(i, line))
+##with open('alignment.csv', 'rt') as f:
+##    reader = csv.reader(f, delimiter = "\t")
+##    for i,line in enumerate(reader):
+##        print ('line[{}] = {}'.format(i, line))
 
 
-
-alignment = [(0,0), (1,4), (1,5), (2,1), (3,2), (4,3)]
 
 phrases = phrase_extraction(srctext, trgtext, alignment)
 

@@ -163,10 +163,14 @@ def em_run(sentence_pairs):
 
     print()
     print()
+
+
+    with open('alignment.txt', 'w') as align:
+        align.write('\n'.join(''.join(map(str, s1)) for s1 in glist))   
     
-    with open('alignment.csv', 'w', newline = '') as f:
-        wr = csv.writer(f)
-        wr.writerows(glist)
+##    with open('alignment.csv', 'w', newline = '') as f:
+##        wr = csv.writer(f)
+##        wr.writerows(glist)
             
 
 ##    print([x for x in [list(group) for key, group in itertools.groupby(l, key = lambda k: k[1] == 0)]
