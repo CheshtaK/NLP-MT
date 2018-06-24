@@ -154,16 +154,21 @@ def em_run(sentence_pairs):
     if subl != []:
         glist.append(subl)
 
-##    for s in glist:
-##        print(*s)
+    print()
+    print()
 
+    for s in glist:
+        print(*s)
+
+
+    print()
+    print()
     
-    with open('alignment.csv', 'w') as f:
+    with open('alignment.csv', 'w', newline = '') as f:
         wr = csv.writer(f)
         wr.writerows(glist)
             
 
-    
 ##    print([x for x in [list(group) for key, group in itertools.groupby(l, key = lambda k: k[1] == 0)]
 ##          if x[0][1] != 0])
 

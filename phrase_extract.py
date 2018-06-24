@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+import csv
+
 def phrase_extraction(srctext, trgtext, alignment):
     def extract(f_start, f_end, e_start, e_end):
         if f_end < 0:  
@@ -48,6 +50,15 @@ def phrase_extraction(srctext, trgtext, alignment):
 srctext = "please enter valid phone no"
 #           0   1   2  3   4  5 
 trgtext = "कृपया मान्य फोन नंबर दर्ज करें"
+
+
+with open('alignment.csv', 'rt') as f:
+    reader = csv.reader(f, delimiter = "\t")
+    for i,line in enumerate(reader):
+        print ('line[{}] = {}'.format(i, line))
+
+
+
 alignment = [(0,0), (1,4), (1,5), (2,1), (3,2), (4,3)]
 
 phrases = phrase_extraction(srctext, trgtext, alignment)
