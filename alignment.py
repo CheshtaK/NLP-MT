@@ -155,7 +155,7 @@ def em_run(sentence_pairs):
     if subl != []:
         glist.append(subl)
 
-    print(glist)
+    print("GLIST", glist)
 
     print()
     print()

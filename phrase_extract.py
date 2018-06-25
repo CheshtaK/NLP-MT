@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 
 import ast
+import csv
 
 def phrase_extraction(srctext, trgtext, alignment):
     def extract(f_start, f_end, e_start, e_end):
@@ -57,7 +58,7 @@ def phrase_extraction(srctext, trgtext, alignment):
 
 phrases =[]
 
-with open('in.txt', encoding = 'utf-8') as e, open('out.txt', encoding = 'utf-8') as h, open('alignment.txt', encoding = 'utf-8') as align:
+with open('in.txt', encoding = 'utf-8-sig') as e, open('out.txt', encoding = 'utf-8-sig') as h, open('alignment.txt', encoding = 'utf-8-sig') as align:
     for english, hindi, alignment in zip(e, h, align):
         english = english.strip();
         hindi = hindi.strip();
@@ -78,9 +79,25 @@ with open('in.txt', encoding = 'utf-8') as e, open('out.txt', encoding = 'utf-8'
             k,v = p
             return v[0]
 
+        ph = []
         for i, p in enumerate(sorted(dlist.items(), key = ordering), 1):
             k, v = p
-            print ("({0}) {1} {2} — {3}".format( i, v[0], k, " ; ".join(v[1])))
+
+            for z in range(len(v[1])):
+                ph.append((k, v[1][z]))
+                print(ph)
+
+                with open('phrases.csv', 'a', newline = '', encoding = 'utf-8') as phr:
+                    wr = csv.writer(phr)
+                    wr.writerows(ph)
+##                with open('phrases.txt', 'a', encoding = 'utf-8-sig') as phr:
+##                    phr.write('\n'.join('%s %s' %x for x in ph))
+
+##            ph.append((k,v[1]))
+##            print(ph)
+##            with open('phrases.txt', 'w') as phr:
+##                phr.write(str(ph))
+##            print ("({0}) {1} {2} — {3}".format( i, v[0], k, " ; ".join(v[1])))
 
 
 
