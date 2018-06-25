@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-import csv
+import ast
 
 def phrase_extraction(srctext, trgtext, alignment):
     def extract(f_start, f_end, e_start, e_end):
@@ -28,8 +28,8 @@ def phrase_extraction(srctext, trgtext, alignment):
 
     srctext = srctext.split()   
     trgtext = trgtext.split()   
-    srclen = len(srctext)       
-    trglen = len(trgtext)       
+    srclen = len(srctext)
+    trglen = len(trgtext)
     e_aligned = [i for i,_ in alignment]
     f_aligned = [j for _,j in alignment]
 
@@ -38,7 +38,7 @@ def phrase_extraction(srctext, trgtext, alignment):
         for e_end in range(e_start, srclen):
             f_start, f_end = trglen-1 , -1  
             for e,f in alignment:
-                if e_start <= e <= e_end:
+                if e_start <= e <= e_end:   
                     f_start = min(f, f_start)
                     f_end = max(f, f_end)
             phrases = extract(f_start, f_end, e_start, e_end)
@@ -47,29 +47,6 @@ def phrase_extraction(srctext, trgtext, alignment):
     return bp
 
 
-with open('in.txt') as e, open('out.txt') as h:
-    with open('alignment.csv', 'r') as align:
-        reader = csv.reader(align, delimiter = "\t")
-        for english, hindi in zip(e, h):
-            english = english.strip()
-            hindi = hindi.strip()
-            for align in reader:
-                print(english, hindi, align)
-            
-
-
-
-
-
-
-
-
-
-
-
-
-
-##
 ##open('alignment.csv', 'r') as align:
 ##    for english, hindi, alignment in zip(e, h, align):
 ##        english = english.strip()
@@ -78,11 +55,41 @@ with open('in.txt') as e, open('out.txt') as h:
 ##        print(english, hindi, alignment)
 
 
-#             0     1     2     3    4 
-srctext = "please enter valid phone no"
-#           0   1   2  3   4  5 
-trgtext = "कृपया मान्य फोन नंबर दर्ज करें"
+phrases =[]
 
+with open('in.txt', encoding = 'utf-8') as e, open('out.txt', encoding = 'utf-8') as h, open('alignment.txt', encoding = 'utf-8') as align:
+    for english, hindi, alignment in zip(e, h, align):
+        english = english.strip();
+        hindi = hindi.strip();
+        alignment = alignment.strip();
+        alignment = list(ast.literal_eval(alignment))
+        phrases = phrase_extraction(english, hindi, alignment)
+        dlist = {}
+        for p, a, b in phrases:
+            if a in dlist:
+                dlist[a][1].append(b)
+            else:
+                dlist[a] = [p, [b]]
+
+        for v in dlist.values():
+            v[1].sort(key=lambda x: len(x))
+
+
+        def ordering(p):
+            k,v = p
+            return v[0]
+
+        for i, p in enumerate(sorted(dlist.items(), key = ordering), 1):
+            k, v = p
+            print ("({0}) {1} {2} — {3}".format( i, v[0], k, " ; ".join(v[1])))
+
+
+
+
+##srctext = "please enter valid phone no"
+##trgtext = "कृपया मान्य फोन नंबर दर्ज करें"
+##
+##alignment = [(0,0), (1,4), (1,5), (2,1), (3,2), (4,3)]
 
 ##with open('alignment.csv', 'rt') as f:
 ##    reader = csv.reader(f, delimiter = "\t")
@@ -90,24 +97,5 @@ trgtext = "कृपया मान्य फोन नंबर दर्ज �
 ##        print ('line[{}] = {}'.format(i, line))
 
 
+##phrases = phrase_extraction(srctext, trgtext, alignment)
 
-phrases = phrase_extraction(srctext, trgtext, alignment)
-
-dlist = {}
-for p, a, b in phrases:
-    if a in dlist:
-        dlist[a][1].append(b)
-    else:
-        dlist[a] = [p, [b]]
-
-for v in dlist.values():
-    v[1].sort(key=lambda x: len(x))
-
-
-def ordering(p):
-    k,v = p
-    return v[0]
-
-for i, p in enumerate(sorted(dlist.items(), key = ordering), 1):
-    k, v = p
-    print ("({0}) {1} {2} — {3}".format( i, v[0], k, " ; ".join(v[1])))

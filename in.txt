@@ -1,3 +1,7 @@
 please enter valid pan no
 please enter valid phone no
-please enter pan
+please enter valid rate of interest
+please enter valid mobile no
+please enter valid lan no
+please enter valid loan amount
+please enter loan account no

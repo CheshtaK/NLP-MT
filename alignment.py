@@ -5,6 +5,7 @@ import operator
 from functools import reduce
 import pickle
 import csv
+import json
 
 def em_run(sentence_pairs):
 
@@ -154,6 +155,8 @@ def em_run(sentence_pairs):
     if subl != []:
         glist.append(subl)
 
+    print(glist)
+
     print()
     print()
 
@@ -165,8 +168,11 @@ def em_run(sentence_pairs):
     print()
 
 
+##    with open('alignment.txt', 'w') as align:
+##        json.dump(glist, align, ensure_ascii=False)
+
     with open('alignment.txt', 'w') as align:
-        align.write('\n'.join(''.join(map(str, s1)) for s1 in glist))   
+        align.write('\n'.join(str(s1) for s1 in glist))   
     
 ##    with open('alignment.csv', 'w', newline = '') as f:
 ##        wr = csv.writer(f)
@@ -192,8 +198,8 @@ def em_run(sentence_pairs):
 ##            
 ##    print(SplitList)
 
-    #if ((i[0] for i in l):
-     #   print ('break')
+##    if ((i[0] for i in l):
+##        print ('break')
 
 
 
@@ -207,16 +213,31 @@ def em_run(sentence_pairs):
 
 def main():
 
-    Elines = [Eline.rstrip('\n') for Eline in open('in.txt')]
+##    Elines = [Eline.rstrip('\n') for Eline in open('in.txt')]
+##
+##    with open('out.txt', 'r', encoding = 'utf-8') as hindi:
+##        Hlines = [Hline.rstrip('\n') for Hline in hindi]
+##        
+##    SENTENCES = [(Elines[0].split(), Hlines[0].split()),
+##                 (Elines[1].split(), Hlines[1].split()),
+##                 (Elines[2].split(), Hlines[2].split()),
+##                 (Elines[3].split(), Hlines[3].split()),
+##                 (Elines[4].split(), Hlines[3].split()),
+##                 (Elines[5].split(), Hlines[3].split()),
+##                 (Elines[6].split(), Hlines[6].split())]
 
-    with open('out.txt', 'r', encoding = 'utf-8') as hindi:
+
+
+    sentences = []
+    num = sum(1 for line in open('in.txt'))
+
+    with open('in.txt', 'r', encoding = 'utf-8') as english, open('out.txt', 'r', encoding = 'utf-8') as hindi:
+        Elines = [Eline.rstrip('\n') for Eline in english]
         Hlines = [Hline.rstrip('\n') for Hline in hindi]
-        
-    SENTENCES = [(Elines[0].split(), Hlines[0].split()),
-                 (Elines[1].split(), Hlines[1].split()),
-                 (Elines[2].split(), Hlines[2].split())]
+        for i in range(num):
+            sentences.append((Elines[i].split(), Hlines[i].split()))
 
-    print (em_run(SENTENCES))
+    print (em_run(sentences))
 
 if __name__ == '__main__':
     main()
