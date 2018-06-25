@@ -231,7 +231,7 @@ def main():
     sentences = []
     num = sum(1 for line in open('in.txt'))
 
-    with open('in.txt', 'r', encoding = 'utf-8') as english, open('out.txt', 'r', encoding = 'utf-8') as hindi:
+    with open('in.txt', 'r', encoding = 'utf-8-sig') as english, open('out.txt', 'r', encoding = 'utf-8-sig') as hindi:
         Elines = [Eline.rstrip('\n') for Eline in english]
         Hlines = [Hline.rstrip('\n') for Hline in hindi]
         for i in range(num):

@@ -74,7 +74,6 @@ with open('in.txt', encoding = 'utf-8') as e, open('out.txt', encoding = 'utf-8'
         for v in dlist.values():
             v[1].sort(key=lambda x: len(x))
 
-
         def ordering(p):
             k,v = p
             return v[0]
