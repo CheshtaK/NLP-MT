@@ -7,6 +7,8 @@ import pickle
 import csv
 import json
 
+'''Method to implement the EM Algorithm to obtain word alignment'''
+
 def em_run(sentence_pairs):
 
     source_sentences, target_sentences = list(zip(*sentence_pairs))
@@ -22,10 +24,11 @@ def em_run(sentence_pairs):
         for h in enumerate(sentencesH):
             lh.append(h)
 
-    print(le)
-    print(lh)
-    print ()
-    print()
+    print('Enumerated sentences: \n')
+    print('English \n')
+    print(le, '\n')
+    print('Hindi \n')
+    print(lh, '\n')
         
     source_vocabulary = set(itertools.chain.from_iterable(source_sentences))
     target_vocabulary = set(itertools.chain.from_iterable(target_sentences))
@@ -78,6 +81,8 @@ def em_run(sentence_pairs):
 
     wordP = []
     trans = {}
+
+    '''Finding the maximum probable alignment'''
     
     for source in source_vocabulary:
         wordP = []
@@ -89,11 +94,9 @@ def em_run(sentence_pairs):
             if (source, target) in conditional_probs:
                 if(conditional_probs[source, target] == maxP):
                     trans.update({source : target})
-                    
-    print(trans)
-    print()
-    print()
 
+    print('Translations: \n')                
+    print(trans, '\n')
 
     posR = []
     wordR = []
@@ -105,13 +108,12 @@ def em_run(sentence_pairs):
             wordR.append(word)
             htrans.append(trans[word])
 
-    print()
-    print()
-    print(posR)
-    print()
-    print(wordR)
-    print()
-    print(htrans)
+    print('English word positions: \n')
+    print(posR, '\n')
+    print('English words: \n')
+    print(wordR, '\n')
+    print('Translated Hindi words: \n')
+    print(htrans, '\n')
 
     hpos = []
 
@@ -122,27 +124,18 @@ def em_run(sentence_pairs):
                 break
 
 
-    print()
-    print(hpos)
+    print('Hindi word positions: \n')
+    print(hpos, '\n')
 
 
-    print()
-    print()
+    '''Merging the two positions(English and Hindi) to get alignment for each word'''
+
     aligned = zip(posR, hpos)
     l = list(aligned)
-    print(l)
-
-    index = []
-
-##    x = [i[0] for i in l]
-##    for s in x:
-##        if(s == 0):
-##            index.append(x.index(s))
-##            print('break')
-##
-##    print(index)
 
 
+    '''Forming sublists for individual sentences'''
+    
     glist = []
     subl = []
 
@@ -155,79 +148,26 @@ def em_run(sentence_pairs):
     if subl != []:
         glist.append(subl)
 
-    print("GLIST", glist)
-
-    print()
-    print()
-
+    print('Final word alignments: \n')
     for s in glist:
         print(*s)
+    print('\n')
 
 
-    print()
-    print()
+    '''Writing the alignments in a text file'''
+
+    with open('alignment.txt', 'w', encoding = 'utf-8-sig') as align:
+        align.write('\n'.join(str(s1) for s1 in glist))
 
 
-##    with open('alignment.txt', 'w') as align:
-##        json.dump(glist, align, ensure_ascii=False)
-
-    with open('alignment.txt', 'w') as align:
-        align.write('\n'.join(str(s1) for s1 in glist))   
-    
-##    with open('alignment.csv', 'w', newline = '') as f:
-##        wr = csv.writer(f)
-##        wr.writerows(glist)
-            
-
-##    print([x for x in [list(group) for key, group in itertools.groupby(l, key = lambda k: k[1] == 0)]
-##          if x[0][1] != 0])
-
-##    SplitList = []
-##
-##    for i, tup in enumerate(l):
-##        if i != len(l)-1:
-##            if i == 0:
-##                tmp = []
-##            if tup[0] == 0:
-##                tmp.append(tup)
-##                if tmp:
-##                    SplitList.append(tmp)
-##                    tmp = []
-##        else:
-##            tmp.append(tup)
-##            
-##    print(SplitList)
-
-##    if ((i[0] for i in l):
-##        print ('break')
-
-
-
-##    with open('alignment.txt', 'wb') as align:
-##        pickle.dump(l, align)
-    
-    print()
-    print()
+    print('Alignments and their corresponding probabilities: \n')
     return conditional_probs
 
 
 def main():
 
-##    Elines = [Eline.rstrip('\n') for Eline in open('in.txt')]
-##
-##    with open('out.txt', 'r', encoding = 'utf-8') as hindi:
-##        Hlines = [Hline.rstrip('\n') for Hline in hindi]
-##        
-##    SENTENCES = [(Elines[0].split(), Hlines[0].split()),
-##                 (Elines[1].split(), Hlines[1].split()),
-##                 (Elines[2].split(), Hlines[2].split()),
-##                 (Elines[3].split(), Hlines[3].split()),
-##                 (Elines[4].split(), Hlines[3].split()),
-##                 (Elines[5].split(), Hlines[3].split()),
-##                 (Elines[6].split(), Hlines[6].split())]
-
-
-
+    '''Reading the parallel corpus from two files'''
+    
     sentences = []
     num = sum(1 for line in open('in.txt'))
 
@@ -237,7 +177,10 @@ def main():
         for i in range(num):
             sentences.append((Elines[i].split(), Hlines[i].split()))
 
+    '''Aligning'''
+
     print (em_run(sentences))
+    
 
 if __name__ == '__main__':
     main()

@@ -3,6 +3,9 @@
 import ast
 import csv
 
+
+'''Method for phrase extraction'''
+
 def phrase_extraction(srctext, trgtext, alignment):
     def extract(f_start, f_end, e_start, e_end):
         if f_end < 0:  
@@ -48,15 +51,9 @@ def phrase_extraction(srctext, trgtext, alignment):
     return bp
 
 
-##open('alignment.csv', 'r') as align:
-##    for english, hindi, alignment in zip(e, h, align):
-##        english = english.strip()
-##        hindi = hindi.strip()
-##        alignment = alignment.strip()
-##        print(english, hindi, alignment)
-
-
 phrases =[]
+
+'''Reading the files'''
 
 with open('in.txt', encoding = 'utf-8-sig') as e, open('out.txt', encoding = 'utf-8-sig') as h, open('alignment.txt', encoding = 'utf-8-sig') as align:
     for english, hindi, alignment in zip(e, h, align):
@@ -64,6 +61,9 @@ with open('in.txt', encoding = 'utf-8-sig') as e, open('out.txt', encoding = 'ut
         hindi = hindi.strip();
         alignment = alignment.strip();
         alignment = list(ast.literal_eval(alignment))
+
+        '''Phrase Extraction'''
+        
         phrases = phrase_extraction(english, hindi, alignment)
         dlist = {}
         for p, a, b in phrases:
@@ -87,31 +87,8 @@ with open('in.txt', encoding = 'utf-8-sig') as e, open('out.txt', encoding = 'ut
                 ph.append((k, v[1][z]))
                 print(ph)
 
-                with open('phrases.csv', 'a', newline = '', encoding = 'utf-8') as phr:
+                '''Writing the extracted phrases in a csv file'''
+                
+                with open('phrases.csv', 'a', newline = '', encoding = 'utf-8-sig') as phr:
                     wr = csv.writer(phr)
                     wr.writerows(ph)
-##                with open('phrases.txt', 'a', encoding = 'utf-8-sig') as phr:
-##                    phr.write('\n'.join('%s %s' %x for x in ph))
-
-##            ph.append((k,v[1]))
-##            print(ph)
-##            with open('phrases.txt', 'w') as phr:
-##                phr.write(str(ph))
-##            print ("({0}) {1} {2} — {3}".format( i, v[0], k, " ; ".join(v[1])))
-
-
-
-
-##srctext = "please enter valid phone no"
-##trgtext = "कृपया मान्य फोन नंबर दर्ज करें"
-##
-##alignment = [(0,0), (1,4), (1,5), (2,1), (3,2), (4,3)]
-
-##with open('alignment.csv', 'rt') as f:
-##    reader = csv.reader(f, delimiter = "\t")
-##    for i,line in enumerate(reader):
-##        print ('line[{}] = {}'.format(i, line))
-
-
-##phrases = phrase_extraction(srctext, trgtext, alignment)
-

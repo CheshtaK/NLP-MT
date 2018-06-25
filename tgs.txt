@@ -1,13 +1,13 @@
-﻿कृपया	please enter	-0.12323264042394809
-कृपया लोन	please enter	-2.1546649629174235
-कृपया मान्य	please enter valid	-0.12337902116050466
-कृपया मान्य ब्याज	please enter valid	-2.153549513833558
+﻿कृपया	please enter	-0.1222895777582742
+कृपया लोन	please enter	-2.1618852108909103
+कृपया मान्य	please enter valid	-0.13102826240640414
+कृपया मान्य ब्याज	please enter valid	-2.097141118779237
 कृपया मान्य पैन	please enter valid pan	0.0
 कृपया मान्य पैन नंबर	please enter valid pan no	-1.0296194171811581
 कृपया मान्य पैन नंबर दर्ज	please enter valid pan no	-1.0986122886681098
 कृपया मान्य पैन नंबर दर्ज करें	please enter valid pan no	-1.1727202608218315
-मान्य	valid	-0.13176927763112334
-मान्य ब्याज	valid	-2.0918640616783932
+मान्य	valid	-0.13702179756429114
+मान्य ब्याज	valid	-2.0553439901007753
 मान्य पैन	valid pan	0.0
 मान्य पैन नंबर	valid pan no	-0.9932517730102834
 मान्य पैन नंबर दर्ज	valid pan no	-1.0986122886681098
@@ -31,16 +31,21 @@
 फोन नंबर	phone no	-0.916290731874155
 फोन नंबर दर्ज	phone no	-1.0986122886681098
 फोन नंबर दर्ज करें	phone no	-1.3217558399823195
-कृपया मान्य ब्याज दर दर्ज करें	please enter valid rate of interest	0.0
-मान्य ब्याज दर दर्ज करें	valid rate of interest	0.0
-करें	rate	-0.6286086594223742
+कृपया मान्य ब्याज दर दर्ज करें	please enter valid rate of interest	-0.44468582126144557
+कृपया मान्य ब्याज दर दर्ज	please enter valid rate of interest	-1.024504316514388
+मान्य ब्याज दर दर्ज करें	valid rate of interest	-0.4418327522790392
+मान्य ब्याज दर दर्ज	valid rate of interest	-1.0296194171811581
+करें	rate	-1.3217558399823195
 दर्ज करें	rate	-0.7621400520468967
-दर दर्ज करें	rate of interest	-0.6061358035703156
-ब्याज दर दर्ज करें	rate of interest	-0.7884573603642702
-दर	of interest	-0.916290731874155
-दर दर्ज	of interest	-1.2039728043259361
-ब्याज दर	of interest	-1.6094379124341003
-ब्याज दर दर्ज	of interest	-2.3025850929940455
+दर्ज	rate	-1.3217558399823195
+दर दर्ज करें	rate of interest	-0.9694005571881036
+ब्याज दर दर्ज करें	rate of interest	-1.2878542883066382
+दर दर्ज	rate of interest	-1.575536360758419
+ब्याज दर दर्ज	rate of interest	-1.9810014688665833
+दर	of interest	-0.7731898882334817
+दर दर्ज	of interest	-1.466337068793427
+ब्याज दर	of interest	-1.466337068793427
+ब्याज दर दर्ज	of interest	-2.5649493574615367
 कृपया मान्य मोबाइल	please enter valid mobile	0.0
 कृपया मान्य मोबाइल नंबर	please enter valid mobile no	-1.0296194171811581
 कृपया मान्य मोबाइल नंबर दर्ज	please enter valid mobile no	-1.0986122886681098
