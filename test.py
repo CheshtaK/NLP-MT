@@ -1,4 +1,5 @@
 import ast
+import csv
 
 with open('in.txt', encoding = 'utf-8') as e, open('out.txt', encoding = 'utf-8') as h, open('alignment.txt', encoding = 'utf-8') as align:
     for english, hindi, alignment in zip(e, h, align):
@@ -29,3 +30,9 @@ with open('in.txt', 'r', encoding = 'utf-8') as english, open('out.txt', 'r', en
     for i in range(num):
         sentences.append((Elines[i].split(), Hlines[i].split()))
     print(sentences)
+
+
+with open('phrases.csv', encoding = 'utf-8-sig') as phrases:
+    rows = list(csv.reader(phrases))
+    for row in rows:
+        print(row[0], row[1])   
