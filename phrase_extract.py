@@ -1,8 +1,5 @@
-# -*- coding: utf-8 -*-
-
 import ast
 import csv
-
 
 '''Method for phrase extraction'''
 
@@ -51,44 +48,49 @@ def phrase_extraction(srctext, trgtext, alignment):
     return bp
 
 
-phrases =[]
+def main():
 
-'''Reading the files'''
+    phrases =[]
 
-with open('in.txt', encoding = 'utf-8-sig') as e, open('out.txt', encoding = 'utf-8-sig') as h, open('alignment.txt', encoding = 'utf-8-sig') as align:
-    for english, hindi, alignment in zip(e, h, align):
-        english = english.strip();
-        hindi = hindi.strip();
-        alignment = alignment.strip();
-        alignment = list(ast.literal_eval(alignment))
+    with open('in.txt', encoding = 'utf-8-sig') as e, open('out.txt', encoding = 'utf-8-sig') as h, open('alignment.txt', encoding = 'utf-8-sig') as align:
+        for english, hindi, alignment in zip(e, h, align):
+            english = english.strip();
+            hindi = hindi.strip();
+            alignment = alignment.strip();
+            alignment = list(ast.literal_eval(alignment))
 
-        '''Phrase Extraction'''
-        
-        phrases = phrase_extraction(english, hindi, alignment)
-        dlist = {}
-        for p, a, b in phrases:
-            if a in dlist:
-                dlist[a][1].append(b)
-            else:
-                dlist[a] = [p, [b]]
+            '''Phrase Extraction'''
 
-        for v in dlist.values():
-            v[1].sort(key=lambda x: len(x))
+            phrases = phrase_extraction(english, hindi, alignment)
+            dlist = {}
+            for p, a, b in phrases:
+                if a in dlist:
+                    dlist[a][1].append(b)
+                else:
+                    dlist[a] = [p, [b]]
 
-        def ordering(p):
-            k,v = p
-            return v[0]
+            for v in dlist.values():
+                v[1].sort(key=lambda x: len(x))
 
-        ph = []
-        for i, p in enumerate(sorted(dlist.items(), key = ordering), 1):
-            k, v = p
+            def ordering(p):
+                k,v = p
+                return v[0]
 
-            for z in range(len(v[1])):
-                ph.append((k, v[1][z]))
-                print(ph)
-
-                '''Writing the extracted phrases in a csv file'''
+            ph = []
+            for i, p in enumerate(sorted(dlist.items(), key = ordering), 1):
+                k, v = p
                 
-                with open('phrases.csv', 'a', newline = '', encoding = 'utf-8-sig') as phr:
-                    wr = csv.writer(phr)
-                    wr.writerows(ph)
+                for z in range(len(v[1])):
+                    ph.append((k, v[1][z]))
+                    print(ph)
+
+                    '''Writing the extracted phrases in a csv file'''
+                
+                    with open('phrases.csv', 'a', newline = '', encoding = 'utf-8-sig') as phr:
+                        wr = csv.writer(phr)
+                        wr.writerows(ph)
+
+
+if __name__ == '__main__':
+    main()
+    

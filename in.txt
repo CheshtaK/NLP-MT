@@ -1,7 +1,100 @@
-please enter valid pan no
-please enter valid phone no
-please enter valid rate of interest
-please enter valid mobile no
-please enter valid lan no
-please enter valid loan amount
-please enter loan account no
+﻿(required)
+akola
+next
+good
+ajay
+others
+tenure
+definitely
+assam
+ahmedabad
+self-reliance
+age
+archives
+articles
+mandatory
+indore
+orissa
+uttarakhand
+udaipur
+last name
+availability
+top
+agreement
+address
+application
+airports
+sdf
+overview
+companie
+companies
+karnal
+career
+karnataka
+kalyan
+contact
+ms
+kerala
+careers
+calculator
+copyright
+cochin
+kochi
+coimbatore
+kolkata
+collateral
+kolhapur
+area
+sectors
+gujarat
+guwahati
+chandigarh
+chennai
+chattisgarh
+date of birth
+jaipur
+respectivel
+respectively
+jalandhar
+jodhpur
+turnover
+test
+training
+tweet
+thane
+deposits
+disclaimer
+tamil nadu
+trichy
+telangana
+thrissur
+document
+documents
+delhi
+durgapur
+dehradun
+new
+no
+nagpur
+nashik
+investing
+investors
+punjab
+results
+transportation
+testing
+identity
+eligibility
+previous
+pune
+type
+process
+products
+processing
+feedback
+fax
+phone
+tel
+outstanding
+button
+baroda

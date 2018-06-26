@@ -3,9 +3,6 @@ import copy
 import itertools
 import operator
 from functools import reduce
-import pickle
-import csv
-import json
 
 '''Method to implement the EM Algorithm to obtain word alignment'''
 
@@ -89,11 +86,19 @@ def em_run(sentence_pairs):
         for target in target_vocabulary:
             if (source, target) in conditional_probs:
                 wordP.append(conditional_probs[source, target])
-        maxP = max(wordP)
-        for target in target_vocabulary:
-            if (source, target) in conditional_probs:
-                if(conditional_probs[source, target] == maxP):
-                    trans.update({source : target})
+        if len(wordP) == 1:
+            maxP = wordP
+            for target in target_vocabulary:
+                if (source, target) in conditional_probs:
+                    if(conditional_probs[source, target] == 1.0):
+                        trans.update({source : target})
+                        
+        elif(len(wordP) > 1):
+            maxP = max(wordP)
+            for target in target_vocabulary:
+                if (source, target) in conditional_probs:
+                    if(conditional_probs[source, target] == maxP):
+                        trans.update({source : target})
 
     print('Translations: \n')                
     print(trans, '\n')
@@ -128,11 +133,10 @@ def em_run(sentence_pairs):
     print(hpos, '\n')
 
 
-    '''Merging the two positions(English and Hindi) to get alignment for each word'''
+    '''Merging the two positions(English and Hindi) to get alignment tuples for each word'''
 
     aligned = zip(posR, hpos)
     l = list(aligned)
-
 
     '''Forming sublists for individual sentences'''
     
@@ -169,7 +173,7 @@ def main():
     '''Reading the parallel corpus from two files'''
     
     sentences = []
-    num = sum(1 for line in open('in.txt'))
+    num = sum(1 for line in open('in.txt', encoding = 'utf-8-sig'))
 
     with open('in.txt', 'r', encoding = 'utf-8-sig') as english, open('out.txt', 'r', encoding = 'utf-8-sig') as hindi:
         Elines = [Eline.rstrip('\n') for Eline in english]

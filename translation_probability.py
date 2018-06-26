@@ -1,12 +1,9 @@
 from collections import defaultdict
-import sys
 import math
 import csv
 
 countHindi = defaultdict(lambda: defaultdict(int))
 sumCountEnglish = defaultdict(int)
-countEnglish = defaultdict(lambda: defaultdict(int))
-sumCountHindi = defaultdict(int)
 
 '''Method to find Translation Probability'''
 
@@ -26,7 +23,7 @@ def findTranslationProbability():
     with open('tgs.txt', 'w', encoding = 'utf-8-sig') as f:
         f.write('\n'.join(data))
 
-
+                    
 def main():
     findTranslationProbability()
 
