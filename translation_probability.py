@@ -17,8 +17,12 @@ def findTranslationProbability():
     data = []
     for key in countHindi:
         for key1 in countHindi[key]:
-            translationProbability = math.log(float(countHindi[key][key1])/sumCountEnglish[key])
-            data.append(key1 + '\t' + key + '\t' + str(translationProbability))
+            if (countHindi[key][key1]) == (sumCountEnglish[key]):
+                translationProbability = 1.0
+                data.append(key1 + '\t' + key + '\t' + str(translationProbability))
+            else:
+                translationProbability = math.log(float(countHindi[key][key1])/sumCountEnglish[key])
+                data.append(key1 + '\t' + key + '\t' + str(translationProbability))
 
     with open('tgs.txt', 'w', encoding = 'utf-8-sig') as f:
         f.write('\n'.join(data))
