@@ -1,1 +1,1 @@
-﻿*Will be generated when you run translation_probability.py*
+﻿﻿*Will be generated when you run translation_probability.py*

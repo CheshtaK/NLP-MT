@@ -43,10 +43,10 @@ def em_run(sentence_pairs):
     
     i = 0
     while conditional_probs_old != conditional_probs:
-##        print('Step 1')
+        print('Step 1')
         conditional_probs_old = copy.copy(conditional_probs)
 
-##        print('Step 2')
+        print('Step 2')
         alignment_probs = {
             i: {
                 tuple(alignment):
@@ -57,35 +57,36 @@ def em_run(sentence_pairs):
             for i, sentence_alignments in enumerate(alignments)
         }
 
-##        print('Step 3')
+        print('Step 3')
         for sentence_idx, sentence_alignments in alignment_probs.items():
             total = float(sum(sentence_alignments.values()))
             probs = {alignment: value / total
                      for alignment, value in sentence_alignments.items()}
             alignment_probs[sentence_idx] = probs
 
-##        print('Step 4')
+        print('Step 4')
         word_translations = defaultdict(lambda: defaultdict(float))
         for sentence_alignments in alignment_probs.values():
             for word_pairs, prob in sentence_alignments.items():
                 for source_word, target_word in word_pairs:
                     word_translations[target_word][source_word] += prob
 
-##        print('Step 5')
+        print('Step 5')
         conditional_probs = {}
         for target_word, translations in word_translations.items():
             total = float(sum(translations.values()))
             for source_word, score in translations.items():
-##                print('Step 6')
+                print('Step 6')
                 conditional_probs[source_word, target_word] = score / total
-##                print(conditional_probs[source_word, target_word])
+                print(source_word, target_word, '\n')
+                print(conditional_probs[source_word, target_word])
 
     wordP = []
     trans = {}
 
     '''Finding the maximum probable alignment'''
 
-##    print('Step 7')
+    print('Step 7')
     for source in source_vocabulary:
         wordP = []
         for target in target_vocabulary:
