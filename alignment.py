@@ -166,7 +166,7 @@ def em_run(sentence_pairs):
 
     '''Writing the alignments in a text file'''
 
-    with open('alignment.txt', 'a', encoding = 'utf-8-sig') as align:
+    with open('alignment.txt', 'w', encoding = 'utf-8-sig') as align:
         align.write('\n'.join(str(s1) for s1 in glist))
         align.write('\n')
 
