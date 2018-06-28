@@ -10,38 +10,36 @@ def main():
         lh = []
         ll = []
 
-##        for i in range(num):
-##            sentencesH.append(Hlines[i].split())
+        for i in range(num):
+            sentencesH.append(Hlines[i].split())
 
         for i in range(num):
             sentencesL.append(Llines[i].split())
             
-##        for sentenceH in sentencesH:
-##            for h in enumerate(sentenceH):
-##                lh.append(h)
+        for sentenceH in sentencesH:
+            for h in enumerate(sentenceH):
+                lh.append(h)
 
         for sentenceL in sentencesL:
             for l in enumerate(sentenceL):
                 ll.append(l)
 
-##        print(lh,'\n')
+        print(lh,'\n')
         print(ll,'\n')
 
         posH = []
         posL = []
 
-##        for pos,word in lh:
-##            posH.append(pos)
+        for pos,word in lh:
+            posH.append(pos)
 
         for pos,word in ll:
             posL.append(pos)
 
-        posH = posL
-
-##        print(posH,'\n')
-##        print(len(posH),'\n')
-##        print(posL,'\n')
-##        print(len(posL),'\n')
+        print(posH,'\n')
+        print(len(posH),'\n')
+        print(posL,'\n')
+        print(len(posL),'\n')
 
         aligned = zip(posH, posL)
         l = list(aligned)
