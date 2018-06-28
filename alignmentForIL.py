@@ -15,17 +15,31 @@ def main():
 
         for i in range(num):
             sentencesL.append(Llines[i].split())
-            
-        for sentenceH in sentencesH:
+
+        parallel = zip(sentencesH, sentencesL)
+        lp = list(parallel)
+##        print(lp)
+
+        for i in lp:
+            while len(i[0]) != len(i[1]):
+                if len(i[0]) < len(i[1]):
+                    i[0].append('UNK')
+                elif len(i[0]) > len(i[1]):
+                    i[1].append('UNK')
+                print(i)
+
+        n_sentencesH, n_sentencesL = zip(*lp)
+
+        nh = list(n_sentencesH)
+        nl = list(n_sentencesL)
+
+        for sentenceH in nh:
             for h in enumerate(sentenceH):
                 lh.append(h)
 
-        for sentenceL in sentencesL:
+        for sentenceL in nl:
             for l in enumerate(sentenceL):
                 ll.append(l)
-
-        print(lh,'\n')
-        print(ll,'\n')
 
         posH = []
         posL = []
@@ -63,7 +77,6 @@ def main():
         for s in glist:
             print(*s)
         print('\n')
-
 
         with open('alignment.txt', 'w', encoding = 'utf-8-sig') as align:
             align.write('\n'.join(str(s1) for s1 in glist))
