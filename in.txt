@@ -1,6 +1,0 @@
-﻿﻿*Source Data*
-Input Format:
-
-please select product
-please select city
-please select title

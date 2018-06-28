@@ -4,6 +4,7 @@ import csv
 '''Method for phrase extraction'''
 
 def phrase_extraction(srctext, trgtext, alignment):
+    
     def extract(f_start, f_end, e_start, e_end):
         if f_end < 0:  
             return {}

@@ -5,33 +5,49 @@ def main():
         Hlines = [Hline.rstrip('\n') for Hline in hindi]
         Llines = [Lline.rstrip('\n') for Lline in lang]
 
-        sentences = []
+        sentencesH = []
+        sentencesL = []
         lh = []
+        ll = []
+
+##        for i in range(num):
+##            sentencesH.append(Hlines[i].split())
 
         for i in range(num):
-            sentences.append(Hlines[i].split())
+            sentencesL.append(Llines[i].split())
+            
+##        for sentenceH in sentencesH:
+##            for h in enumerate(sentenceH):
+##                lh.append(h)
 
-        print(sentences)
+        for sentenceL in sentencesL:
+            for l in enumerate(sentenceL):
+                ll.append(l)
 
-        for sentencesH in sentences:
-            for h in enumerate(sentencesH):
-                lh.append(h)
-
-        print(lh)
+##        print(lh,'\n')
+        print(ll,'\n')
 
         posH = []
+        posL = []
 
-        for pos,word in lh:
-            posH.append(pos)
+##        for pos,word in lh:
+##            posH.append(pos)
 
-        print(posH)
+        for pos,word in ll:
+            posL.append(pos)
 
-        posL = posH
+        posH = posL
 
-        print(posL)
+##        print(posH,'\n')
+##        print(len(posH),'\n')
+##        print(posL,'\n')
+##        print(len(posL),'\n')
 
         aligned = zip(posH, posL)
         l = list(aligned)
+
+        print(l,'\n')
+        print(len(l),'\n')
 
         glist = []
         subl = []
