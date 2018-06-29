@@ -1,3 +1,6 @@
+import itertools
+import pickle
+
 def main():
     num = sum(1 for line in open('in.txt', encoding = 'utf-8-sig'))
     
@@ -18,7 +21,6 @@ def main():
 
         parallel = zip(sentencesH, sentencesL)
         lp = list(parallel)
-##        print(lp)
 
         for i in lp:
             while len(i[0]) != len(i[1]):
@@ -32,6 +34,12 @@ def main():
 
         nh = list(n_sentencesH)
         nl = list(n_sentencesL)
+
+        with open('in.txt', 'w', encoding = 'utf-8-sig') as newHindi:
+            newHindi.writelines('\n'.join(str(' '.join(map(str, line))) for line in nh))
+
+        with open('out.txt', 'w', encoding = 'utf-8-sig') as newLang:
+            newLang.writelines('\n'.join(str(' '.join(map(str, line))) for line in nl))
 
         for sentenceH in nh:
             for h in enumerate(sentenceH):
